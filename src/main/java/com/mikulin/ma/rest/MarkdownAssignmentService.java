@@ -17,8 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.mikulin.ma.AuthUtils;
 import com.mikulin.ma.HTMLTransformer;
-import com.mikulin.ma.spring.MongoDBManager;
-//import com.mikulin.ma.spring.TransactionBo;
+import com.mikulin.ma.db.MongoDBManager;
 
 /**
  * Service to transform input line according to the existed rules.
@@ -33,9 +32,6 @@ public class MarkdownAssignmentService {
 	private ServletContext context;
 
 
-//	@Autowired
-//	TransactionBo transactionBo;
-	
 	@Autowired
 	private MongoDBManager mongoManager;
 
@@ -43,7 +39,6 @@ public class MarkdownAssignmentService {
 	@POST
 	@Produces(MediaType.TEXT_HTML)
 	public Response doConvert(@FormParam("initial") String initialInput, @Context ContainerRequestContext request) {
-//		System.out.println(transactionBo.save());
 		LOGGER.debug("input {}", initialInput);
 		String result = transform(initialInput);
 		mongoManager.addLogRecord(AuthUtils.getUsername(request), initialInput, result);
@@ -54,13 +49,5 @@ public class MarkdownAssignmentService {
 	protected String transform(String input) {
 		return HTMLTransformer.transform(input);
 	}
-
-//	private MongoDBManager getMongoManager() {
-//		if (mongoManager == null) {
-//			mongoManager = new MongoDBManager(context);
-//		}
-//		return mongoManager;
-//
-//	}
 
 }

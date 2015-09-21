@@ -4,7 +4,7 @@ package com.mikulin.ma;
  * Application constants.
  *
  */
-public class Constants {
+public final class Constants {
 	private Constants() {
 	}
 

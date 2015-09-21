@@ -50,6 +50,7 @@ public class AuthUtils {
 			// authorization header looks like Basicuser:password
 			String credentials = AuthUtils.getCrdentials(authHeader);
 
+			//TODO move somewhere?
 			// Next simple logic is implemented: pass if user starts with "t"
 			// and password is "1".
 			return (credentials.startsWith("t") && credentials.endsWith(":1")) == true;
